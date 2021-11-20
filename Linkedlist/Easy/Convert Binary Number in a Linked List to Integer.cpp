@@ -11,7 +11,7 @@ struct ListNode {
   };
   
 
-  class Solution {
+class Solution {
 public:
     int getDecimalValue(ListNode* head) {
         vector<int>res;
