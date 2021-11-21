@@ -42,3 +42,33 @@ struct ListNode {
         }
         return node.next;
     }
+
+
+    /// O(n) time complexity and O(1) space complexity
+
+    ListNode *reverseKGroup(ListNode *head, int k) {
+        if(head==nullptr || k==1) return head;
+         ListNode *dummy = new ListNode(0);
+         dummy->next = head;
+         ListNode *prev = dummy;
+         ListNode *curr = dummy;
+         ListNode *Next = dummy;
+         int size = 0;
+         while(curr->next){
+             size++;
+             curr=curr->next;
+         }
+         while(k<=size){
+             curr = prev->next;
+             Next = curr->next;
+             for(int i=1;i<k;i++){
+                 curr->next = Next->next;
+                 Next->next = prev->next;
+                 prev->next = Next;
+                 Next = curr->next;
+             }
+             size-=k;
+             prev = curr;
+         }
+         return dummy->next;
+    }
