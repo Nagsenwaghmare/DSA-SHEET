@@ -3,6 +3,8 @@
 using namespace std;
 
 
+// dynamic programming solution
+
 int tribonacci(int n) {
         int dp[38];
         fill(dp,dp+38,0);
