@@ -5,10 +5,6 @@
 using namespace std;
 
 
-
-
-
-
 string S(int n){
          if(n == 1){ return "0";}
         
@@ -26,3 +22,4 @@ string S(int n){
         string s = S(n);
         return s[k-1];
     }
+    

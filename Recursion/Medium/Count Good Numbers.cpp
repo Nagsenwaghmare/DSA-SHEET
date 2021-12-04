@@ -3,11 +3,6 @@
 using namespace std;
 
 
-
-
-
-
-
 long long modPow(long long x, long long y, int m = 1000000007)
 {
     if (y == 0)

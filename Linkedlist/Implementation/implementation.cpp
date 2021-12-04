@@ -58,7 +58,23 @@ void printlist(Node *head){
         head = head->next;
     }
 }
+//insertatcertainposition
 
+Node *insertatposition(Node * head,int pos,int k){
+    Node * temp = new Node(k);
+    if(pos==1){
+        temp->next = head;
+        return temp; 
+    }
+    Node *curr = head;
+    for(int i=0;i<pos-2 && curr!=NULL;i++){
+        curr = curr->next;
+    }
+    if(curr==NULL) return head;
+    temp->next = curr->next;
+    curr->next = temp;
+    return head;
+}
 
 // main function
 
