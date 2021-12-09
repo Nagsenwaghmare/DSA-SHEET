@@ -43,3 +43,18 @@ void levelordertravrsal(Node *root){
 }
 
 //time complexity o(h*m);
+
+
+//level order traversal in time complexity of o(n)
+
+void levelordertravrsal(Node * root){
+    queue<Node *> q;
+    q.push(root);
+    while(!q.empty()){
+        Node *curr = q.front();
+        cout<<curr->data<<" ";
+        q.pop();
+        if(curr->left)q.push(curr->left);
+        if(curr->right)q.push(curr->right);
+    }
+}
