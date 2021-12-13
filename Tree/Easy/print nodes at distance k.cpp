@@ -29,3 +29,7 @@ void printnodeatK(Node *root,int k){
 }
 
 
+// to print levelordertraversal we can use two functions first is printnodesatk and height function and we will call function printnodesatk for 
+//every value of k ranging from o to h-1;
+
+
