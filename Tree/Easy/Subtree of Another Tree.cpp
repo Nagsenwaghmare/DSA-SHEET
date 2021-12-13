@@ -24,3 +24,4 @@ struct TreeNode {
         if(s->val!=t->val) return false;
         return issame(s->left,t->left) && issame(s->right,t->right);
     }
+    
