@@ -16,6 +16,7 @@ struct Node{
 };
 
 
+
 // here we will be traversing the tree by using level with line by line what it means is 
 // lets suppose you have   1 2 3 4 5
 
@@ -24,7 +25,6 @@ struct Node{
 //            1
 //            2 3
 //            4 5
-
 
 // here is the code 
 
