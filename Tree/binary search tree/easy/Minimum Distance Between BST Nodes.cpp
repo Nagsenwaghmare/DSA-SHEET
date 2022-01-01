@@ -18,9 +18,6 @@ struct TreeNode {
 
 
 
-
-
-
 void inorder(TreeNode * root,vector<int>&res){
         if(!root) return ;
         inorder(root->left,res);
