@@ -7,6 +7,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// in this implementation we have implemented the heap  where we studied about min heap and all the function related  to it
+// insert  and extract min
 
 
 class Minheap{
@@ -59,11 +61,34 @@ void insert(int x){
         i=parent(i);
     }
 }
+
+// here we gonna implement the extractmin from the array that is we gonna remove the minimum element
+// from the minheap that is the root of the tree how we gonna do that is we will swap it with the last element and will call minhepify for the 
+// root;
+
+// let's implement it
+
+int extractmin(){
+    if(size==0){
+        return INT_MAX;
+    }
+    if(size==1){
+        size--;
+        a[size];
+    }
+    swap(a[0],a[size-1]);
+    size--;
+    minheapify(0);
+    return a[size];
+}
+
 };
 
 
 
 int main(){
     Minheap h(11);
-
+    h.insert(12);
+    h.insert(23);
+    cout<<"minimum among the heap is = "<<h.extractmin();
 }
