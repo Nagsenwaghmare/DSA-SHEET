@@ -14,4 +14,4 @@ vector<int> findLonely(vector<int>& nums) {
             }
         }
         return res;
-    }
+    }  
