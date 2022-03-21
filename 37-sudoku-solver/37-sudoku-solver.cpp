@@ -4,7 +4,14 @@ public:
         int N = board.size();
         for(int k=0;k<N;k++){
             if((board[i][k]==(n)) || board[k][j]==(n)) return false;
-            if (board[(i/3)*3 + (k/3)][(j/3)*3 + (k%3)] == n) return false;
+        }
+        int s = sqrt(N);
+        int rs = i-(i%3);
+        int cs = j-(j%3);
+        for(int a=0;a<s;a++){
+            for(int b=0;b<s;b++){
+                if(board[rs+a][cs+b]==n) return false;
+            }
         }
         return true;
     }
