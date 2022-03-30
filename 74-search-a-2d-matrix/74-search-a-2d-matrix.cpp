@@ -3,12 +3,14 @@ public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         int m = matrix.size();
         int n = matrix[0].size();
-        set<int>s;
         for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                s.insert(matrix[i][j]);
+            if(matrix[i][0]<=target && matrix[i][n-1]>=target)
+            {
+                for(int j=0;j<n;j++){
+                    if(matrix[i][j]==target)return true;
+                }
             }
         }
-        return s.find(target)!=s.end();
+        return false;
     }
 };
