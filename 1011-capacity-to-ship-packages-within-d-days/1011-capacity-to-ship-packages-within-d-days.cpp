@@ -1,34 +1,34 @@
 class Solution {
 public:
-    bool ispossible(vector<int>& nums, int m,int mid){
-        int count =1;
-        int sum =0;
-        for(int i=0;i<nums.size();i++){
-            sum+=nums[i];
+    bool ispossible(vector<int>&a,int mid,int k){
+        int subcount = 1;
+        int sum = 0;
+        for(int i=0;i<a.size();i++){
+            sum+=a[i];
             if(sum>mid){
-                count++;
-                sum = nums[i];
+                subcount++;
+                sum = a[i];
             }
         }
-        return count<=m;
+        return subcount<=k;
     }
-    int shipWithinDays(vector<int>& nums, int m) {
+    int shipWithinDays(vector<int>& a, int k) {
+        int sum =0;
         int maxi =0;
-        int sum  =0;
-        for(auto i:nums){
-            maxi = max(maxi,i);
+        for(auto i:a){
             sum+=i;
+            maxi = max(maxi,i);
         }
-        int l = maxi;
-        int r = sum;
-        int ans =0;
-        while(l<=r){
-            int mid = l+(r-l)/2;
-            if(ispossible(nums,m,mid)){
+        int low = maxi;
+        int high = sum;
+        int ans = 0;
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if(ispossible(a,mid,k)){
                 ans = mid;
-                r = mid-1;
+                high =mid-1;
             }else{
-                l = mid+1;
+                low = mid+1;
             }
         }
         return ans;
