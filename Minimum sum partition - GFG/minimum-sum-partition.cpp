@@ -6,36 +6,39 @@ using namespace std;
 class Solution{
 
   public:
-	int minDifference(int arr[], int k)  { 
-	    // Your code goes here
-	    vector<int>a;
-	    for(int i=0;i<k;i++){
-	        a.push_back(arr[i]);
-	    }
-	    int sum=0;
-        for(auto it:a)
-            sum+=it;
-        int n=a.size();
+	void issubset(int a[],int n,vector<int>&res,int sum){
         bool dp[n+1][sum+1];
-        for(int i=0;i<=n;i++)
-            dp[i][0]=1;
-        for(int i=1;i<=sum;i++)
-            dp[0][i]=0;
-        
-        for(int i=1;i<=n;i++)
-            for(int j=1;j<=sum;j++)
-                if(a[i-1] > j)
-                    dp[i][j]=dp[i-1][j];
-                else
-                    dp[i][j]=(dp[i-1][j] || dp[i-1][j-a[i-1]] );
-        
-        int ans=0;
-        int half=sum/2;
-        for(int i=0;i<=half;i++)
-            if(dp[n][i])
-                ans=sum-2*i;
-        return ans;
-	} 
+        for(int i=0;i<n+1;i++){
+            for(int j=0;j<sum+1;j++){
+                if(i==0)dp[i][j]=false;
+                if(j==0)dp[i][j] =true;
+            }
+        }
+        for(int i=1;i<n+1;i++){
+            for(int j=1;j<sum+1;j++){
+                if(a[i-1]<=j){
+                    dp[i][j] = ((dp[i-1][j-a[i-1]])||(dp[i-1][j]));
+                }else{
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+        }
+        int half = sum/2;
+        for(int i=0;i<=half;i++){
+            if(dp[n][i]==true)res.push_back(i);
+        }
+    }
+	int minDifference(int a[], int n)  { 
+	    int sum =0;
+	    for(int i=0;i<n;i++){
+	        sum+=a[i];
+	    }
+	    vector<int>res;
+	    issubset(a,n,res,sum);
+	    int k = *max_element(res.begin(),res.end());
+	    
+	    return sum-2*k;
+	}  
 };
 
 
