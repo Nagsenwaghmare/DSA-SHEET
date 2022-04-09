@@ -35,9 +35,11 @@ class Solution{
 	    }
 	    vector<int>res;
 	    issubset(a,n,res,sum);
-	    int k = *max_element(res.begin(),res.end());
-	    
-	    return sum-2*k;
+	    int mini= INT_MAX;
+	    for(int i=0;i<res.size();i++){
+	        mini = min(mini,(sum-2*res[i]));
+	    }
+	    return mini;
 	}  
 };
 
