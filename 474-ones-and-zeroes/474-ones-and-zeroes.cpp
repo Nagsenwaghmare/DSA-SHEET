@@ -1,34 +1,46 @@
 class Solution {
 public:
-    int memoize(int r,int m,int n,vector<string>& strs,vector<vector<vector<int>>> &dp)
-    {
+    
+    int findMaxForm(vector<string>& strs, int M, int N) {
+        int size = strs.size();
+        vector<vector<vector<int>>> dp(size,vector<vector<int>>(M+1,vector<int>(N+1,0)));
+        
         int zero=0,one=0;
-        for(int i=0;i<strs[r].size();i++)  //counting 1's and 0's
+        
+        for(int i=0;i<strs[0].size();i++) //count of 0 and 1 for first index
         {
-            if(strs[r][i]=='0') zero++;
+            if(strs[0][i]=='0') zero++;
             else one++;
         }
-        
-        if(r==0)
+        //base case
+        for(int i=zero;i<=M;i++)
         {
-            if(m-zero>=0 && n-one>=0)  return 1;
-            return 0;
+            for(int j=one;j<=N;j++)
+                dp[0][i][j]=1;
         }
         
-        if(dp[r][m][n]!=-1)
-            return dp[r][m][n];
         
-        int notPick = memoize(r-1,m,n,strs,dp);
-        int pick = INT_MIN;
-        if(m-zero>=0 && n-one>=0)
-            pick = memoize(r-1,m-zero,n-one,strs,dp) + 1;
-        return dp[r][m][n] = max(pick,notPick);
-    }
-    int findMaxForm(vector<string>& strs, int m, int n) {
-        int r = strs.size()-1;
-        // vector<vector<vector<int>>>dp;
-        vector< vector< vector<int> > > dp(r+1 , vector< vector<int> > (m+1, vector<int> (n+1,-1)));
-        // memset(dp,-1,sizeof(dp));
-        return memoize(r,m,n,strs,dp);
+        for(int r=1;r<size;r++)
+        {
+            zero=0,one=0; //counting 0 and 1 for string
+            for(int i=0;i<strs[r].size();i++)
+            {
+                if(strs[r][i]=='0') zero++;
+                else one++;
+            }
+            
+            for(int m=0;m<=M;m++)  //loop for zero balance
+            {
+                for(int n=0;n<=N;n++)  //loop for one balance
+                {
+                    int notPick = dp[r-1][m][n];
+                    int pick = INT_MIN;
+                    if(m-zero>=0 && n-one>=0)
+                        pick = dp[r-1][m-zero][n-one] + 1;
+                    dp[r][m][n] = max(pick,notPick);
+                }
+            }
+        }
+        return dp[size-1][M][N];
     }
 };
