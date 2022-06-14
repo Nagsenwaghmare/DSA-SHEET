@@ -1,8 +1,8 @@
 class Solution {
 public:
-    int minDistance(string w1, string w2) {
-        int m = w1.size();
-        int n = w2.size();
+    int minDistance(string s1, string s2) {
+        int m = s1.size();
+        int n = s2.size();
         int dp[m+1][n+1];
         for(int i=0;i<=m;i++){
             for(int j=0;j<=n;j++){
@@ -13,15 +13,13 @@ public:
         }
         for(int i=1;i<=m;i++){
             for(int j=1;j<=n;j++){
-                if(w1[i-1]==w2[j-1]){
-                    dp[i][j] = 1+dp[i-1][j-1];
+                if(s1[i-1]==s2[j-1]){
+                    dp[i][j]=1+dp[i-1][j-1];
                 }else{
-                    dp[i][j] = max(dp[i][j-1],dp[i-1][j]);
+                    dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
                 }
             }
         }
-        cout<<dp[m][n];
-        int k = 2*dp[m][n];
-        return (m+n-k);
+        return (m+n-(2*dp[m][n]));
     }
 };
