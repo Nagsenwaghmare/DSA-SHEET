@@ -18,12 +18,13 @@ class Solution
         string s = bitset<32>(n).to_string();
         int cnt =0;
         for(int i=31;i>=0;i--){
+            cnt++;
             if(s[i]=='1'){
                 break;
             }
-            cnt++;
+            
         }
-        return cnt+1;
+        return cnt;
     }
 };
 
