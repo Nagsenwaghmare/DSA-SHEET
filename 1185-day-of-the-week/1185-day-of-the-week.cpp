@@ -7,7 +7,7 @@ public:
         return false;
     }
     string dayOfTheWeek(int day, int month, int year) {
-        string week[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        string week[] = { "Friday", "Saturday","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",};
         int daysOfMonth []= {31,28,31,30,31,30,31,31,30,31,30,31};
         int num = 0;
         for(int i = 1971;i<year;i++){
@@ -19,6 +19,6 @@ public:
             num += daysOfMonth[i];
         }
         num += day - 1;
-        return week[(num + 5)%7];
+        return week[(num )%7];
     }
 };
