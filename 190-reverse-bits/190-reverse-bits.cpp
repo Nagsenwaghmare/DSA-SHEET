@@ -1,13 +1,15 @@
 class Solution {
 public:
     uint32_t reverseBits(uint32_t n) {
-        int result=0;
-        for(int i=0;i<32;i++){
-            int lsb=n&1;  //to calculate whether the left bit is 1 or 0
-            int reverselsb=lsb<<(31-i);//to reverse the the generated lsb
-            result=result|reverselsb;//to set the value in the result
-            n= n>>1;    // shift right n to get new lsb every time
-            
+        uint32_t result =0;
+        int i=0;
+        while(n){
+            int k = n&1;
+            if(k){
+                result+=(k*pow(2,31-i));
+            }
+            i++;
+            n=n>>1;
         }
         return result;
     }
