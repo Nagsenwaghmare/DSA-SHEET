@@ -1,35 +1,38 @@
 class Solution {
 public:
     vector<int> findOrder(int n, vector<vector<int>>& p) {
-        vector<vector<int>>course(n);
-        vector<int>result;
+        vector<int>res;
+        vector<vector<int>>adj(n);
         vector<int>indegree(n,0);
-        for(auto kl:p){
-            course[kl[1]].push_back(kl[0]);
-            indegree[kl[0]]++;
+        for(auto i:p){
+            adj[i[1]].push_back(i[0]);
+            indegree[i[0]]++;
         }
         queue<int>q;
-        for(int i=0;i<n;i++){
-            if(indegree[i]==0)q.push(i);
-        }
-        int cnt =0;
-        while(!q.empty()){
-            int curr =q.front();
-            result.push_back(curr);
-            q.pop();
-            cnt++;
-            for(auto v:course[curr]){
-                indegree[v]--;
-                if(indegree[v]==0){
-                    q.push(v);
-                }
+        for(int i=0;i<indegree.size();i++){
+            if(indegree[i]==0){
+                q.push(i);
+                res.push_back(i);
             }
         }
-        if(cnt==n){
-            return result;
-        }else{
-            result.clear();
+        int cnt=0;
+        while(!q.empty()){
+            int curr = q.front();
+            q.pop();
+            
+            for(auto i:adj[curr]){
+                indegree[i]--;
+                if(indegree[i]==0){
+                    res.push_back(i);
+                    q.push(i);
+                }
+            }
+            cnt++;
         }
-        return result;
+        // for(auto i:res){
+        //     cout<<i<<" ";
+        // }
+        vector<int>temp;
+        return cnt==n?res:temp;
     }
 };
