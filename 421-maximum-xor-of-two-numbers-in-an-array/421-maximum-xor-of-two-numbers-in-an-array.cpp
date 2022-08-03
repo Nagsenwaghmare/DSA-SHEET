@@ -1,49 +1,52 @@
-class TrieNode{
-public:
+struct TrieNode{
+    // bool isend;
     TrieNode *child[2];
-    
     TrieNode(){
-        this->child[0] = NULL; //for 0 bit 
-        this->child[1] = NULL; //for 1 bit
+        // isend = false;
+        for(int i=0;i<2;i++){
+            child[i] = nullptr;
+        }
     }
 };
+
+
+
 class Solution {
-    TrieNode *newNode;
-    
-    void insert(int x){   //to insert each element into the Trie
-        TrieNode *t = newNode;
-        bitset<32> bs(x);
-        
-        for(int j=31; j>=0; j--){
-            if(!t->child[bs[j]]) t->child[bs[j]] = new TrieNode(); //start from the MSB =, move to LSB using bitset
-            t = t->child[bs[j]];
-        }    
-    }
-    
 public:
-    int findMaximumXOR(vector<int>& nums) {
-        newNode = new TrieNode();
-        for(auto &n : nums) insert(n); //insert all the elements into the Trie
-        
-        int ans=0; //Stores the maximum XOR possible so far
-        for(auto n : nums){
-            ans = max(ans, maxXOR(n));  //updates the ans as we traverse the array & compute max XORs at each element.
+    void insert(TrieNode *root,int x){
+        TrieNode * curr = root;
+        bitset<32>b(x);
+        for(int i=31;i>=0;i--){
+            if(curr->child[b[i]]==nullptr){
+                curr->child[b[i]] = new TrieNode();
+            }
+            curr = curr->child[b[i]];
+        }
+    }
+    int maxxor(TrieNode *root,int x){
+        TrieNode * curr = root;
+        bitset<32>b(x);
+        int ans =0;
+        for(int i=31;i>=0;i--){
+            if(curr->child[!b[i]]){
+                ans+=(1<<i);
+                curr = curr->child[!b[i]];
+            }else{
+                curr = curr->child[b[i]];
+            }
         }
         return ans;
     }
-    
-    int maxXOR(int n){
-        TrieNode *t = newNode;
-        bitset<32> bs(n);
-        int ans=0; 
-        for(int j=31; j>=0; j--){
-            if(t->child[!bs[j]]){
-                ans += (1<<j);
-                t = t->child[!bs[j]];
-            }
-           
-            else t = t->child[bs[j]];
+        
+    int findMaximumXOR(vector<int>& nums) {
+        int res =0;
+        TrieNode * root = new TrieNode();
+        for(auto i:nums){
+            insert(root,i);
         }
-        return ans;
+        for(auto i:nums){
+            res = max(res,maxxor(root,i));
+        }
+        return res;
     }
 };
