@@ -11,7 +11,9 @@ public:
             if(end[i-1]>0){
                 end[i-1]--;
                 end[i]++;
+                
             }else if(left[i+1]>0 && left[i+2]>0){
+                cout<<i<<" "<<i+1<<" "<<i+2<<"\n";
                 left[i+1]--;
                 left[i+2]--;
                 end[i+2]++;
