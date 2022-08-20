@@ -1,4 +1,5 @@
-/* Write your T-SQL query statement below */
--- # Write your MySQL query statement below
- select score , dense_rank() over(order by score desc) as rank from Scores;
--- select Score, dense_rank() over(order by Score desc)from Scores as rank
+select score,
+(select count(distinct(score))
+ from Scores where score >= s.score) `rank` 
+ from Scores s 
+ order by `rank`;
