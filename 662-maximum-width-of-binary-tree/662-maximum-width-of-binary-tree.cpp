@@ -10,24 +10,37 @@
  * };
  */
 class Solution {
-    public:
-    void dfs(TreeNode *root,long long int idx,int d,vector<long long int> &left,int &ans)
-   {
-        if(!root) return;
-
-        if(d>=left.size()) left.push_back(idx); 
-
-        ans = max((long long)ans,idx-left[d]+1);
-       
-         dfs(root->left,2*(idx-left[d]),d+1,left,ans);
-         dfs(root->right,2*(idx-left[d])+1,d+1,left,ans);
-   }
-   
-   int widthOfBinaryTree(TreeNode* root) 
-   {
-       int ans=1;
-       vector<long long int>left;
-       dfs(root,1,0,left,ans);
-       return ans;  
-   }
+public:
+    int widthOfBinaryTree(TreeNode* root) {
+        queue<TreeNode *>q;
+        q.push(root);
+        unsigned int start=0;
+         unsigned int end=0;
+         unsigned int maxi = 0;
+        map<TreeNode *,unsigned int >mp;
+        while(!q.empty()){
+            int n = q.size();
+            vector<TreeNode *>temp;
+            for(int i=0;i<n;i++){
+                
+                TreeNode * curr = q.front();
+                if(i==0)start =mp[curr];
+                if(i==n-1)end = mp[curr];
+                temp.push_back(curr);
+                q.pop();
+                if(curr->left){
+                    q.push(curr->left);
+                    mp.insert({curr->left,mp[curr]*2});
+                    
+                }
+                if(curr->right){
+                    q.push(curr->right);
+                    mp.insert({curr->right,mp[curr]*2+1});
+                }
+            }
+            maxi = max(end-start+1,maxi);
+        }
+        
+        return maxi;
+    }
 };
