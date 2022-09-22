@@ -5,31 +5,20 @@
 <p>Return <em>a list of lists of the suggested products after each character of </em><code>searchWord</code><em> is typed</em>.</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
 <pre><strong>Input:</strong> products = ["mobile","mouse","moneypot","monitor","mousepad"], searchWord = "mouse"
-<strong>Output:</strong> [
-["mobile","moneypot","monitor"],
-["mobile","moneypot","monitor"],
-["mouse","mousepad"],
-["mouse","mousepad"],
-["mouse","mousepad"]
-]
-<strong>Explanation:</strong> products sorted lexicographically = ["mobile","moneypot","monitor","mouse","mousepad"]
-After typing m and mo all products match and we show user ["mobile","moneypot","monitor"]
-After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
+<strong>Output:</strong> [["mobile","moneypot","monitor"],["mobile","moneypot","monitor"],["mouse","mousepad"],["mouse","mousepad"],["mouse","mousepad"]]
+<strong>Explanation:</strong> products sorted lexicographically = ["mobile","moneypot","monitor","mouse","mousepad"].
+After typing m and mo all products match and we show user ["mobile","moneypot","monitor"].
+After typing mou, mous and mouse the system suggests ["mouse","mousepad"].
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
 <pre><strong>Input:</strong> products = ["havana"], searchWord = "havana"
 <strong>Output:</strong> [["havana"],["havana"],["havana"],["havana"],["havana"],["havana"]]
-</pre>
-
-<p><strong>Example 3:</strong></p>
-
-<pre><strong>Input:</strong> products = ["bags","baggage","banner","box","cloths"], searchWord = "bags"
-<strong>Output:</strong> [["baggage","bags","banner"],["baggage","bags","banner"],["baggage","bags"],["bags"]]
+<strong>Explanation:</strong> The only word "havana" will be always suggested while typing the search word.
 </pre>
 
 <p>&nbsp;</p>
