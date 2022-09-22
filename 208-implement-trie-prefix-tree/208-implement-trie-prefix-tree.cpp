@@ -1,61 +1,48 @@
-
-class TrieNode {
-  public:
-        bool isend;
-        TrieNode *child[26];
-        TrieNode(){
-            isend  = false;
-            for(int i=0;i<26;i++){
-                child[i] = NULL;
-            }
+struct trie{
+    bool isword;
+    trie *next[26];
+    trie(){
+        isword = false;
+        for(int i=0;i<26;i++){
+            next[i] = NULL;
         }
+    }
 };
 
 
 class Trie {
 public:
-        Trie(){
-          root = new TrieNode();
-        }
-    
+    trie *root = new trie();
     void insert(string word) {
-        TrieNode * curr = root;
-        int idx =0;
+        trie * temp = root;
         for(int i=0;i<word.size();i++){
-            idx = word[i]-'a';
-            if(curr->child[idx]==NULL){
-                curr->child[idx] = new TrieNode();
-            }      
-            curr = curr->child[idx];
+            if(temp->next[word[i]-'a']==NULL){
+                temp->next[word[i]-'a'] = new trie();
+            }
+            temp = temp->next[word[i]-'a'];
         }
-        curr->isend = true;
+        temp->isword = true;
     }
     
     bool search(string word) {
-        TrieNode * curr = root;
-        int idx =0;
+        trie * temp = root;
         for(int i=0;i<word.size();i++){
-            idx = word[i]-'a';
-            if(curr->child[idx]==NULL)return false;
-            curr = curr->child[idx];
+            if(temp->next[word[i]-'a']==NULL){
+                return false;
+            }
+            temp = temp->next[word[i]-'a'];
         }
-        return curr->isend;
+        return temp->isword;
     }
     
     bool startsWith(string prefix) {
-        TrieNode * curr  = root;
-        int idx =0;
+        trie *temp = root;
         for(int i=0;i<prefix.size();i++){
-            idx = prefix[i]-'a';
-            if(curr->child[idx]==NULL){
-                return false;
-            }
-            curr  = curr->child[idx];
+            if(temp->next[prefix[i]-'a']==NULL)return false;
+            temp = temp->next[prefix[i]-'a'];
         }
         return true;
     }
-    private:
-    TrieNode* root;
 };
 
 /**
