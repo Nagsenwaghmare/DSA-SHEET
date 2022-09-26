@@ -27,6 +27,7 @@ public:
     }
     bool PredictTheWinner(vector<int>& nums) {
         int n = nums.size();
+        if(n%2==0) return true;
         vector<vector<int>> memo = buildmemo(n);
         int firstscore = predict_winner(nums,0,nums.size()-1,memo);
         int tot_score = 0;
