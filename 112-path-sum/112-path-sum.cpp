@@ -11,25 +11,26 @@
  */
 class Solution {
 public:
-    void pathsum(TreeNode * root,vector<vector<int>>&res,vector<int>temp,int k){
+    void helper(TreeNode *root,vector<int>temp,vector<vector<int>>&res){
         if(!root)return;
         temp.push_back(root->val);
         if(root->left==nullptr && root->right==nullptr){
             res.push_back(temp);
             return;
         }
-        pathsum(root->left,res,temp,k);
-        pathsum(root->right,res,temp,k);
+        helper(root->left,temp,res);
+        helper(root->right,temp,res);
     }
     bool hasPathSum(TreeNode* root, int k) {
         if(!root)return false;
         vector<int>temp;
         vector<vector<int>>res;
-        pathsum(root,res,temp,k);
+        helper(root,temp,res);
         for(auto i:res){
             int sum=0;
-            sum = accumulate(begin(i),end(i),sum);
-            cout<<sum<<" ";
+            for(auto j:i){
+                sum+=j;
+            }
             if(sum==k)return true;
         }
         return false;
