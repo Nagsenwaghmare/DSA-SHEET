@@ -3,9 +3,8 @@ public:
     int search(vector<int>& arr, int target) {
         int n = arr.size();
         int low = 0, high = n-1;
-        long int mid = -1;
         while(low <= high){
-            mid = low + (high-low)/2;
+             int mid = low + (high-low)/2;
             if(arr[mid] == target) return  mid;
             if(arr[mid] >= arr[low]){
                 /* left half sorted */
