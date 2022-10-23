@@ -1,20 +1,24 @@
 class Solution {
 public:
-    int search(vector<int>& arr, int target) {
-        int n = arr.size();
-        int low = 0, high = n-1;
-        while(low <= high){
-             int mid = low + (high-low)/2;
-            if(arr[mid] == target) return  mid;
-            if(arr[mid] >= arr[low]){
-                /* left half sorted */
-                if(target >= arr[low] && target < arr[mid]) high = mid-1;
-                else low = mid+1;
-            }
-            else{
-                /* right half is sorted */
-                if( target > arr[mid] && target <= arr[high]) low = mid+1;
-                else high = mid-1;
+    int search(vector<int>& a, int target) {
+        int n= a.size();
+        int l = 0;
+        int r = n-1;
+        while(l<=r){
+            int mid = l+(r-l)/2;
+            if(a[mid]==target)return mid;
+            if(a[l]<=a[mid]){
+                if(target<a[mid] && target>=a[l]){
+                    r = mid-1;
+                }else{
+                    l = mid+1;
+                }
+            }else{
+                if(target>a[mid] && target<=a[r]){
+                    l = mid+1;
+                }else{
+                    r  = mid-1;
+                }
             }
         }
         return -1;
