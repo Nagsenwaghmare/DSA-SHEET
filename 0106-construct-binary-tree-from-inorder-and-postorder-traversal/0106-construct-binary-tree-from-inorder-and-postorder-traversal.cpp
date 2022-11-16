@@ -6,8 +6,6 @@ public:
         if(left>right)return nullptr;
         TreeNode * root = new TreeNode(postorder[postidx--]);
         int mid = mp[root->val];
-        cout<<postidx<<" ";
-        // return nullptr;
         root->right = buildtree(mid+1,right,postorder,postidx);
         root->left = buildtree(left,mid-1,postorder,postidx);
         return root;
